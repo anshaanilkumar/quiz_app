@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quizz/qsbank.dart';
 import 'package:quizz/question.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
+Quizbank qsbank= Quizbank();
 void main() {
   runApp(const MyApp());
 }
@@ -40,42 +43,27 @@ class Quizpage extends StatefulWidget {
 
 class _QuizpageState extends State<Quizpage> {
   List<Widget>Scorekeeper=[];
-  int questionNumber = 0;
 
-  // List<String>Questions=[
-  //   'Is the Earth flat?',
-  //   'Is water wet? ',
-  //   'Is the sky blue?',
-  //   'Is a tomato a fruit?',
-  //   'Do humans have wings? '
-  //   'Does a dog bark?'
-  //   'Can fish fly? '
-  //
-  //
-  // ];
-  //
-  // List<bool>answers=[
-  //   false,
-  //   true,
-  //   true,
-  //   true,
-  //   false,
-  //   true,
-  //   false
-  // ];
+  void checkAns(bool userSelectAns){
+    bool correct = qsbank.getAns();
+    setState(() {
+      if(qsbank.isFinished()==true){
+        Alert(context: context,
+        title: 'Finished',
+        desc: 'You are completed successfully').show();
+        qsbank.reset();
+        Scorekeeper=[];
+      }else{
+        if(userSelectAns==correct){
+          Scorekeeper.add(Icon(Icons.check,color: Colors.green,));
+        }else{
+          Scorekeeper.add(Icon(Icons.close,color: Colors.red,));
+          qsbank.nextQs();
+        }
+      }
 
-  // Question q1=Question(q: 'Is the Earth flat?', a: false);
-  List<Question> questionList=[
-    Question(q: 'Is the Earth flat?', a: false),
-    Question(q: 'Is water wet? ', a: true),
-    Question(q: 'Is the sky blue?', a: true),
-    Question(q: 'Is a tomato a fruit?', a: true),
-    Question(q: 'Do humans have wings? ', a: false),
-    Question(q: 'Does a dog bark?', a: true),
-    Question(q: 'Can fish fly? ', a: false),
-  ];
-
-
+    });
+  }
 
 
 
@@ -90,7 +78,9 @@ class _QuizpageState extends State<Quizpage> {
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Center(
-              child: Text(questionList[questionNumber].questionText,textAlign: TextAlign.center,
+              child: Text(
+                qsbank.getQs(),
+                // qsbank.questionList[questionNumber].questionText,textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 25
@@ -109,17 +99,8 @@ class _QuizpageState extends State<Quizpage> {
                    ),
                 ),
                 onPressed: (){
-                  // questionNumber =questionNumber+1;
-                  bool correct = questionList[questionNumber].questionAnswer;
-                  if(correct==true){
-                    print("you are right");
-                  }else{
-                    print("you are wrong");
-                  }
-                  setState(() {
-                    questionNumber++;
-                  //   Scorekeeper.add(Icon(Icons.check ,color: Colors.green,));
-                   });
+               checkAns(true);
+
 
                 }, child: Text("True",style: TextStyle(
               color: Colors.white, fontSize: 20
@@ -138,16 +119,18 @@ class _QuizpageState extends State<Quizpage> {
                   ),
                 ),
                 onPressed: (){
-                  bool correct = questionList[questionNumber].questionAnswer;
-                  if(correct==false){
-                    print("you are right");
-                  }else{
-                    print("you are wrong");
-                  }
-                  setState(() {
-                    questionNumber++;
-                    //   Scorekeeper.add(Icon(Icons.check ,color: Colors.green,));
-                  });
+                  checkAns(false);
+                  // bool correct = qsbank.questionList[questionNumber].questionAnswer;
+                  // bool correct = qsbank.getAns();
+                  // if(correct==false){
+                  //   print("you are right");
+                  // }else{
+                  //   print("you are wrong");
+                  // }
+                  // setState(() {
+                  //   qsbank.nextQs();
+                  //   //   Scorekeeper.add(Icon(Icons.check ,color: Colors.green,));
+                  // });
                 }, child: Text("False",style: TextStyle(
                 color: Colors.white, fontSize: 20
             ),)
