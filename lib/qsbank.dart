@@ -6,11 +6,18 @@ class Quizbank{
   List<Question> _questionList=[
     Question(q: 'Is the Earth flat?', a: false),
     Question(q: 'Is water wet? ', a: true),
-    Question(q: 'Is the sky blue?', a: true),
+    Question(q: 'Is Venus the hottest planet in the solar system?', a: true),
     Question(q: 'Is a tomato a fruit?', a: true),
-    Question(q: 'Do humans have wings? ', a: false),
+    Question(q: 'Did World War II end in 1945? ', a: true),
     Question(q: 'Does a dog bark?', a: true),
     Question(q: 'Can fish fly? ', a: false),
+    Question(q: 'Do fish have eyelids? ', a: false),
+    Question(q: 'Can an octopus change its color?  ', a: true),
+    Question(q: 'Is sound faster than light ', a: false),
+    Question(q: 'Is the sky blue?', a: true),
+    Question(q: 'Is the sun a planet? ', a: false),
+    Question(q: 'Does an octopus have three hearts? ', a: true),
+    Question(q: 'Do humans have wings? ', a: false),
   ];
 
   void nextQs(){

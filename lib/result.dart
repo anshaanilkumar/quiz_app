@@ -66,19 +66,22 @@ class ResultPage extends StatelessWidget {
               children: [
                 ElevatedButton.icon(
                   onPressed: onReset,
-                  icon: const Icon(Icons.refresh),
-                  label: const Text("Reset"),
-                ),
-                // ElevatedButton(
-                //   style: ElevatedButton.styleFrom(
-                //     padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 18),
-                //     shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(30),
-                //     ),
-                //     backgroundColor: Colors.white,
-                //     shadowColor: Colors.black54,
-                //     elevation: 10,
-                //   ),
+                  icon: const Icon(Icons.refresh ,color: Colors.blue,),
+                  label: const Text("Reset",style: TextStyle(
+                      color: Colors.blueAccent,
+                      fontWeight: FontWeight.bold,
+                    fontSize: 18
+                  ),),
+
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 18),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    backgroundColor: Colors.white,
+                    shadowColor: Colors.blueAccent,
+                    elevation: 6,
+                  )),
               ],
             )
           ],
